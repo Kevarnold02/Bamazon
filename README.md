@@ -6,8 +6,8 @@
 An interactive shopping site where both mySQL and node.JS are used to take, track, and update inventory based on user purchases.
 
 ###Images of Bamazon in action!
-* !["GitBash Pre Order Prompt"](/images/gitbasePreOrder.png)
-* !["GitBash Post Order Display"](/images/gitbasePostOrder.png)
+* ![GitBash Pre Order Prompt](/images/gitbashPreOrder.png)
+* !["GitBash Post Order Display"](/images/gitbashPostOrder.png)
 * !["mySQL Table before and after order"](/images/mysqlPRE_AND_POST_ORDER.png)
 
 
