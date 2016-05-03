@@ -88,6 +88,85 @@ var connection = mysql.createConnection({
 			connection.end();
 		}
 
+		function lowStockQty() {
+			connection.connect();
+			connection.query('SELECT * FROM Products WHERE StockQuantity < 5', function(err, results) {
+				if (err) throw err;
+
+				 for (var i = 0; i < results.length; i++) {
+				  	console.log('Product ID: ', results[i].ItemID);
+				  	console.log('Product Name: ', results[i].ProductName);
+				  	console.log('Price: ', results[i].Price);
+				  	// console.log('Department: ', results[i].DepartmentName);
+				  	console.log('Current Stock Quantity: ', results[i].StockQuantity);
+				  	console.log("----------------------------------------------------");
+				  }
+			});
+			connection.end();
+		}
+
+		function addNewProduct() {
+			var addNewItem = {
+				properties: {
+					ProductName: {desc: 'name of new product to add'},
+					DepartmentName: {desc: 'new product department name'},
+					Price: {desc: 'Price of new product'},
+					StockQuantity: {desc: 'how many units of the new product to add to StockQuantity'}
+				},
+			};
+
+			prompt.get(addNewItem, function(err, res){
+				var updateProductsTable = {
+					ProductName: res.ProductName,					 
+					DepartmentName: res.DepartmentName,
+					Price: res.Price,
+					StockQuantity: res.StockQuantity
+			};
+
+			connection.connect();
+			connection.query('INSERT INTO Products SET ?', updateProductsTable, function(err, res){
+				if (err) throw err;
+					console.log('You have added the new item to the Products table');
+					connection.end();
+				})
+			});
+		}
+
+		// function addToInventory() {
+		// 	connection.connect();
+		// 	connection.query('SELECT * FROM Products', function(err, results) {
+		// 		if (err) throw err;
+
+		// 		 for (var i = 0; i < results.length; i++) {
+		// 		  	console.log('Product ID: ', results[i].ItemID);
+		// 		  	console.log('Product Name: ', results[i].ProductName);
+		// 		  	console.log('Price: ', results[i].Price);
+		// 		  	// console.log('Department: ', results[i].DepartmentName);
+		// 		  	console.log('Current Stock Quantity: ', results[i].StockQuantity);
+		// 		  	console.log("----------------------------------------------------");
+		// 		  }
+		// 	});
+		// 	connection.end();
+		// }
+
+		// function addNewProduct() {
+		// 	connection.connect();
+		// 	connection.query('SELECT * FROM Products', function(err, results) {
+		// 		if (err) throw err;
+
+		// 		 for (var i = 0; i < results.length; i++) {
+		// 		  	console.log('Product ID: ', results[i].ItemID);
+		// 		  	console.log('Product Name: ', results[i].ProductName);
+		// 		  	console.log('Price: ', results[i].Price);
+		// 		  	// console.log('Department: ', results[i].DepartmentName);
+		// 		  	console.log('Current Stock Quantity: ', results[i].StockQuantity);
+		// 		  	console.log("----------------------------------------------------");
+		// 		  }
+		// 	});
+		// 	connection.end();
+		// }
+//------------------------UNCOMMENT ABOVE----------
+
 		// prompt.get(productInfo, function (err, res){
 		// 	var purchase = {
 		// 		Manager_Options: res.Manager_Options
